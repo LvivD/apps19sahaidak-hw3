@@ -36,4 +36,17 @@ class Student {
         return "Student{name=" + name + ", surname=" + surname + ", " + "GPA=" + GPA + ", year=" + year + '}';
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        Student std = (Student) obj;
+        return this.toString().equals(std.toString());
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (this.getGPA()*10000 + this.getYear());
+    }
 }

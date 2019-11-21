@@ -4,6 +4,7 @@ import java.util.Arrays;
 import ua.edu.ucu.functions.MyComparator;
 import ua.edu.ucu.functions.MyFunction;
 import ua.edu.ucu.functions.MyPredicate;
+import ua.edu.ucu.smartarr.*;
 
 public class SmartArrayApp {
 
@@ -34,6 +35,8 @@ public class SmartArrayApp {
         // Input: [-1, 2, 0, 1, -5, 3]
         SmartArray sa = new BaseArray(integers);
 
+        sa = new DistinctDecorator(sa);
+
         sa = new FilterDecorator(sa, pr); // Result: [2, 1, 3];
         sa = new SortDecorator(sa, cmp); // Result: [1, 2, 3]
         sa = new MapDecorator(sa, func); // Result: [2, 4, 6]
@@ -54,6 +57,49 @@ public class SmartArrayApp {
         // Hint: to convert Object[] to String[] - use the following code
         //Object[] result = studentSmartArray.toArray();
         //return Arrays.copyOf(result, result.length, String[].class);
-        return null;
+
+        MyPredicate ifGPAGreaterThan4AndSecondYear = new MyPredicate() {
+            @Override
+            public boolean test(Object t) {
+                if (t instanceof Student) {
+                    return (((((Student) t).getGPA()) >= 4) && ((Student) t).getYear() == 2);
+                }
+                throw new RuntimeException();
+            }
+        };
+
+        MyComparator compareSurnames = new MyComparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                if (o1 instanceof Student && o2 instanceof Student) {
+                    return ((Student) o1).getSurname().compareTo(((Student) o2).getSurname());
+                }
+                throw new RuntimeException();
+            }
+        };
+
+        MyFunction getSurnameName = new MyFunction() {
+            @Override
+            public Object apply(Object t) {
+                if (t instanceof Student) {
+                    return ((Student) t).getSurname() + " " +  ((Student) t).getName();
+                }
+                throw new RuntimeException();
+            }
+        };
+
+
+        SmartArray studentsRes = new MapDecorator(
+                new SortDecorator(
+                        new FilterDecorator(
+                                new DistinctDecorator(
+                                        new BaseArray(students)),
+                                ifGPAGreaterThan4AndSecondYear),
+                        compareSurnames),
+                getSurnameName);
+
+        Object[] result = studentsRes.toArray();
+
+        return Arrays.copyOf(result, result.length, String[].class);
     }
 }
