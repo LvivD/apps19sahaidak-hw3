@@ -36,7 +36,6 @@ public class SmartArrayApp {
         SmartArray sa = new BaseArray(integers);
 
         sa = new DistinctDecorator(sa);
-
         sa = new FilterDecorator(sa, pr); // Result: [2, 1, 3];
         sa = new SortDecorator(sa, cmp); // Result: [1, 2, 3]
         sa = new MapDecorator(sa, func); // Result: [2, 4, 6]
@@ -89,7 +88,7 @@ public class SmartArrayApp {
                 throw new RuntimeException();
             }
         };
-        
+
         SmartArray studentsRes = new MapDecorator(
                 new SortDecorator(
                         new FilterDecorator(
