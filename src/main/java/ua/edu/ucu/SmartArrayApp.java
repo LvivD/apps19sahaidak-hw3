@@ -62,30 +62,26 @@ public class SmartArrayApp {
             public boolean test(Object t) {
                 final int GRADE = 4;
                 final int YEAR = 2;
-                if (t instanceof Student) {
-                    return (((Student) t).getGPA()) >= GRADE && ((Student) t).getYear() == YEAR;
-                }
-                throw new RuntimeException();
+                return (((Student) t).getGPA()) >= GRADE && ((Student) t).getYear() == YEAR;
+
             }
         };
 
         MyComparator compareSurnames = new MyComparator() {
             @Override
             public int compare(Object objOne, Object objTwo) {
-                if (objOne instanceof Student && objTwo instanceof Student) {
-                    return ((Student) objOne).getSurname().compareTo(((Student) objTwo).getSurname());
-                }
-                throw new RuntimeException();
+
+                return ((Student) objOne).getSurname().compareTo(((Student) objTwo).getSurname());
+
             }
         };
 
         MyFunction getSurnameName = new MyFunction() {
             @Override
             public Object apply(Object t) {
-                if (t instanceof Student) {
-                    return ((Student) t).getSurname() + " " +  ((Student) t).getName();
-                }
-                throw new RuntimeException();
+
+                return ((Student) t).getSurname() + " " +  ((Student) t).getName();
+
             }
         };
 
