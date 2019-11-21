@@ -5,6 +5,12 @@ import java.util.Arrays;
 // Remove duplicates from SmartArray. Use method equals() to compare objects
 public class DistinctDecorator extends SmartArrayDecorator  {
 
+    public DistinctDecorator(SmartArray smartArray) {
+        super(smartArray);
+        this.smartArray =
+                new BaseArray(arrWithoutRepeats(this.smartArray.toArray()));
+    }
+
     private Object[] arrWithoutRepeats(Object[] arr) {
         Object[] newArr = new Object[arr.length];
         int n = 0;
@@ -22,11 +28,6 @@ public class DistinctDecorator extends SmartArrayDecorator  {
             }
         }
         return Arrays.copyOf(newArr, n);
-    }
-
-    public DistinctDecorator(SmartArray smartArray) {
-        super(smartArray);
-        this.smartArray = new BaseArray(arrWithoutRepeats(this.smartArray.toArray()));
     }
 
     @Override

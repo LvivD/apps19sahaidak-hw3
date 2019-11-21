@@ -58,11 +58,14 @@ public class SmartArrayApp {
         //Object[] result = studentSmartArray.toArray();
         //return Arrays.copyOf(result, result.length, String[].class);
 
-        MyPredicate ifGPAGreaterThan4AndSecondYear = new MyPredicate() {
+        MyPredicate ifGPAGreaterThanFourAndSecondYear = new MyPredicate() {
             @Override
             public boolean test(Object t) {
+                final int GRADE = 4;
+                final int YEAR = 4;
                 if (t instanceof Student) {
-                    return (((((Student) t).getGPA()) >= 4) && ((Student) t).getYear() == 2);
+                    return (((Student) t).getGPA()) >= GRADE
+                            && ((Student) t).getYear() == YEAR;
                 }
                 throw new RuntimeException();
             }
@@ -70,9 +73,10 @@ public class SmartArrayApp {
 
         MyComparator compareSurnames = new MyComparator() {
             @Override
-            public int compare(Object o1, Object o2) {
-                if (o1 instanceof Student && o2 instanceof Student) {
-                    return ((Student) o1).getSurname().compareTo(((Student) o2).getSurname());
+            public int compare(Object objOne, Object objTwo) {
+                if (objOne instanceof Student && objTwo instanceof Student) {
+                    return ((Student) objOne).getSurname().compareTo(
+                            ((Student) objTwo).getSurname());
                 }
                 throw new RuntimeException();
             }
@@ -94,7 +98,7 @@ public class SmartArrayApp {
                         new FilterDecorator(
                                 new DistinctDecorator(
                                         new BaseArray(students)),
-                                ifGPAGreaterThan4AndSecondYear),
+                                ifGPAGreaterThanFourAndSecondYear),
                         compareSurnames),
                 getSurnameName);
 

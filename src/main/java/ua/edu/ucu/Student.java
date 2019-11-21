@@ -33,7 +33,8 @@ class Student {
 
     @Override
     public String toString() {
-        return "Student{name=" + name + ", surname=" + surname + ", " + "GPA=" + GPA + ", year=" + year + '}';
+        return "Student{name=" + name + ", surname=" + surname +
+                ", " + "GPA=" + GPA + ", year=" + year + '}';
     }
 
     @Override
@@ -41,8 +42,10 @@ class Student {
         if (obj == null) {
             return false;
         }
-        Student std = (Student) obj;
-        return this.toString().equals(std.toString());
+        if (! (obj instanceof Student)){
+            return false;
+        }
+        return this.toString().equals(obj.toString());
     }
 
     @Override

@@ -7,6 +7,12 @@ import java.util.Arrays;
 // Tests every element and removes it if it doesn't satisfy MyPredicate
 public class FilterDecorator extends SmartArrayDecorator {
 
+    public FilterDecorator(SmartArray smartArray, MyPredicate predicate) {
+        super(smartArray);
+        this.smartArray =
+                new BaseArray(filter(this.smartArray.toArray(), predicate));
+    }
+
     private Object[] filter(Object[] arr, MyPredicate pr) {
         Object[] newArr = new Object[arr.length];
         int n = 0;
@@ -17,12 +23,6 @@ public class FilterDecorator extends SmartArrayDecorator {
             }
         }
         return Arrays.copyOf(newArr, n);
-    }
-
-    public FilterDecorator(SmartArray smartArray, MyPredicate predicate) {
-        super(smartArray);
-        this.smartArray = new BaseArray(filter(this.smartArray.toArray(), predicate));
-
     }
 
     @Override
