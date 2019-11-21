@@ -62,10 +62,9 @@ public class SmartArrayApp {
             @Override
             public boolean test(Object t) {
                 final int GRADE = 4;
-                final int YEAR = 4;
+                final int YEAR = 2;
                 if (t instanceof Student) {
-                    return (((Student) t).getGPA()) >= GRADE
-                            && ((Student) t).getYear() == YEAR;
+                    return (((Student) t).getGPA()) >= GRADE && ((Student) t).getYear() == YEAR;
                 }
                 throw new RuntimeException();
             }
@@ -75,8 +74,7 @@ public class SmartArrayApp {
             @Override
             public int compare(Object objOne, Object objTwo) {
                 if (objOne instanceof Student && objTwo instanceof Student) {
-                    return ((Student) objOne).getSurname().compareTo(
-                            ((Student) objTwo).getSurname());
+                    return ((Student) objOne).getSurname().compareTo(((Student) objTwo).getSurname());
                 }
                 throw new RuntimeException();
             }
@@ -91,8 +89,7 @@ public class SmartArrayApp {
                 throw new RuntimeException();
             }
         };
-
-
+        
         SmartArray studentsRes = new MapDecorator(
                 new SortDecorator(
                         new FilterDecorator(
@@ -101,6 +98,7 @@ public class SmartArrayApp {
                                 ifGPAGreaterThanFourAndSecondYear),
                         compareSurnames),
                 getSurnameName);
+
 
         Object[] result = studentsRes.toArray();
 
