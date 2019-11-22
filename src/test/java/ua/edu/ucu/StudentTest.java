@@ -68,6 +68,6 @@ public class StudentTest {
 
     @Test
     public void testHashCode() {
-        assertEquals(1005000015, std.hashCode());
+        assertEquals(-185819127, std.hashCode());
     }
 }
