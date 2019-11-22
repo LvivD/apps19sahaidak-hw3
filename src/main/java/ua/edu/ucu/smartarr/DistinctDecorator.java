@@ -7,8 +7,6 @@ public class DistinctDecorator extends SmartArrayDecorator  {
 
     public DistinctDecorator(SmartArray smartArray) {
         super(smartArray);
-        this.smartArray =
-                new BaseArray(arrWithoutRepeats(this.smartArray.toArray()));
     }
 
     private Object[] arrWithoutRepeats(Object[] arr) {
@@ -32,7 +30,7 @@ public class DistinctDecorator extends SmartArrayDecorator  {
 
     @Override
     public Object[] toArray() {
-        return this.smartArray.toArray();
+        return arrWithoutRepeats(this.smartArray.toArray());
     }
 
     @Override
@@ -42,6 +40,6 @@ public class DistinctDecorator extends SmartArrayDecorator  {
 
     @Override
     public int size() {
-        return this.smartArray.toArray().length;
+        return this.toArray().length;
     }
 }

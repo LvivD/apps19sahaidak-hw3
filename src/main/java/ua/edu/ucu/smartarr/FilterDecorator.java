@@ -7,10 +7,11 @@ import java.util.Arrays;
 // Tests every element and removes it if it doesn't satisfy MyPredicate
 public class FilterDecorator extends SmartArrayDecorator {
 
+    private MyPredicate predicate;
+
     public FilterDecorator(SmartArray smartArray, MyPredicate predicate) {
         super(smartArray);
-        this.smartArray =
-                new BaseArray(filter(this.smartArray.toArray(), predicate));
+        this.predicate = predicate;
     }
 
     private Object[] filter(Object[] arr, MyPredicate pr) {
@@ -27,7 +28,7 @@ public class FilterDecorator extends SmartArrayDecorator {
 
     @Override
     public Object[] toArray() {
-        return this.smartArray.toArray();
+        return filter(this.smartArray.toArray(), this.predicate);
     }
 
     @Override
@@ -37,6 +38,6 @@ public class FilterDecorator extends SmartArrayDecorator {
 
     @Override
     public int size() {
-        return this.smartArray.toArray().length;
+        return this.toArray().length;
     }
 }

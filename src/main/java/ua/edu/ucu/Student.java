@@ -45,11 +45,17 @@ class Student {
         if (! (obj instanceof Student)){
             return false;
         }
-        return this.toString().equals(obj.toString());
+        if (this.hashCode() == obj.hashCode()) {
+            return this.GPA == ((Student) obj).getGPA()
+                    && this.year == ((Student) obj).getYear()
+                    && this.name.equals(((Student) obj).getName())
+                    && this.surname.equals(((Student) obj).getSurname());
+        }
+        return false;
     }
 
     @Override
     public int hashCode() {
-        return (int) (this.getGPA()*10000 + this.getYear());
+        return (int) this.GPA + this.year + this.name.hashCode() + this.surname.hashCode();
     }
 }

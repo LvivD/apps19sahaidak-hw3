@@ -7,16 +7,18 @@ import java.util.Arrays;
 // Sorts elements using MyComparator to compare them
 public class SortDecorator extends SmartArrayDecorator {
 
+    private MyComparator com;
+
     public SortDecorator(SmartArray smartArray, MyComparator com) {
         super(smartArray);
-        Object[] arr = this.smartArray.toArray();
-        Arrays.sort(arr, com);
-        this.smartArray = new BaseArray(arr);
+        this.com = com;
     }
 
     @Override
     public Object[] toArray() {
-        return this.smartArray.toArray();
+        Object[] arr = this.smartArray.toArray();
+        Arrays.sort(arr, com);
+        return arr.clone();
     }
 
     @Override
@@ -26,6 +28,6 @@ public class SortDecorator extends SmartArrayDecorator {
 
     @Override
     public int size() {
-        return this.smartArray.toArray().length;
+        return this.toArray().length;
     }
 }

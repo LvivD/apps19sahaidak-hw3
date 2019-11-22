@@ -5,18 +5,20 @@ import ua.edu.ucu.functions.MyFunction;
 // Map every element to another object using MyFunction
 public class MapDecorator extends SmartArrayDecorator {
 
-    public MapDecorator(SmartArray smartArray, MyFunction funk) {
+    private MyFunction func;
+
+    public MapDecorator(SmartArray smartArray, MyFunction func) {
         super(smartArray);
-        Object[] arr = this.smartArray.toArray();
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = funk.apply(arr[i]);
-        }
-        this.smartArray = new BaseArray(arr);
+        this.func = func;
     }
 
     @Override
     public Object[] toArray() {
-        return this.smartArray.toArray();
+        Object[] arr = this.smartArray.toArray();
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = this.func.apply(arr[i]);
+        }
+        return arr.clone();
     }
 
     @Override
@@ -26,6 +28,6 @@ public class MapDecorator extends SmartArrayDecorator {
 
     @Override
     public int size() {
-        return this.smartArray.toArray().length;
+        return this.toArray().length;
     }
 }
