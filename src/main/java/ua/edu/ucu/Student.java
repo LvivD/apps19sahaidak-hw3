@@ -46,7 +46,7 @@ class Student {
             return false;
         }
         if (this.hashCode() == obj.hashCode()) {
-            return this.GPA == ((Student) obj).getGPA()
+            return this.GPA - ((Student) obj).getGPA() < 0.001
                     && this.year == ((Student) obj).getYear()
                     && this.name.equals(((Student) obj).getName())
                     && this.surname.equals(((Student) obj).getSurname());
