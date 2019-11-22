@@ -57,6 +57,13 @@ public class StudentTest {
     }
 
     @Test
+    public void testNotEqualsHash() {
+        Student otherNotEquals = new Student("Name", "Surname",
+                100500.5, 15);
+        assertFalse(std.equals(otherNotEquals));
+    }
+
+    @Test
     public void testEqualsNull() {
         assertFalse(std.equals(null));
     }
